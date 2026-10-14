@@ -1,0 +1,10 @@
+# Lokala referenser, CV och arbetsmaterial
+Inspo/
+work/
+.DS_Store
+**/.DS_Store
+
+# Lokala inställningar och hemligheter
+.env
+.env.*
+node_modules/
