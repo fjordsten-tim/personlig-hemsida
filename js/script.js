@@ -67,3 +67,61 @@ if (temaknapp) {
     visaTemaval();
   });
 }
+
+// Eget formulär via HubSpots publika Forms API. Inga API-nycklar eller spårningscookies.
+const kontaktformular = document.querySelector('#kontaktformular');
+if (kontaktformular) {
+  const faltgrupp = kontaktformular.querySelector('fieldset');
+  const status = document.querySelector('#formular-status');
+  const skicka = kontaktformular.querySelector('[type="submit"]');
+  let skickar = false;
+  kontaktformular.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (skickar || !kontaktformular.reportValidity()) return;
+    const data = new FormData(kontaktformular);
+    const fields = ['firstname', 'email', 'company', 'message'].map(name => ({
+      objectTypeId: '0-1', name, value: String(data.get(name) || '').trim()
+    })).filter(field => field.value);
+    const payload = {fields};
+    // Skicka inte lokala filsökvägar eller URL-parametrar till HubSpot.
+    if (location.protocol === 'https:' || location.protocol === 'http:') {
+      payload.context = {pageUri: location.origin + location.pathname, pageName: document.title};
+    }
+    skickar = true;
+    faltgrupp.disabled = true;
+    kontaktformular.setAttribute('aria-busy', 'true');
+    skicka.textContent = 'Skickar…';
+    status.dataset.state = 'pending';
+    status.textContent = 'Ditt meddelande skickas…';
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+    try {
+      const response = await fetch('https://api.hsforms.com/submissions/v3/integration/submit/149565909/9ad85a76-5ac2-4927-8fd1-e094a9e6d5cc', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        credentials: 'omit', body: JSON.stringify(payload), signal: controller.signal
+      });
+      if (!response.ok) {
+        const svar = await response.json().catch(() => ({}));
+        const skydd = (svar.errors || []).some(error => /CAPTCHA|CONSENT/.test(error.errorType || ''));
+        throw new Error(skydd ? 'protection' : response.status === 429 ? 'rate' : 'rejected');
+      }
+      status.dataset.state = 'success';
+      status.textContent = 'Tack! HubSpot har tagit emot ditt meddelande.';
+      kontaktformular.reset();
+    } catch (error) {
+      status.dataset.state = 'error';
+      status.textContent = error.message === 'protection'
+        ? 'HubSpot kräver ytterligare verifiering. Använd mejllänken nedan. Din text finns kvar.'
+        : error.message === 'rate'
+          ? 'För många försök just nu. Vänta en stund och försök igen. Din text finns kvar.'
+          : 'Vi kunde inte bekräfta att meddelandet kom fram. Din text finns kvar. Försök igen senare eller använd mejllänken nedan.';
+    } finally {
+      clearTimeout(timeout);
+      skickar = false;
+      faltgrupp.disabled = false;
+      kontaktformular.removeAttribute('aria-busy');
+      skicka.textContent = 'Skicka';
+    }
+  });
+  faltgrupp.disabled = false;
+}

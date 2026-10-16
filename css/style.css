@@ -88,9 +88,25 @@ main,.sidhuvud,.kontakt-innehall{width:min(calc(100% - 2 * var(--marginal)),var(
 @keyframes kurser-hoger{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 @media(prefers-reduced-motion:reduce){.kursbanner.rullar .kurser-fonster{overflow-x:auto}.kurskopia{display:none}}
 
-/* 9. HubSpot-formulär. Fältens utseende och texter redigeras i HubSpot. */
+/* 9. Eget kontaktformulär. Färger följer kontaktsektionens tema. */
 .kontaktformular{max-width:780px;margin-top:32px;padding:28px;background:var(--kort);border:1px solid var(--kant);border-radius:var(--radie)}
-.hs-form-frame{width:100%;min-width:0}
+ .kontaktformular fieldset{border:0;margin:0;padding:0;min-width:0}
+.kontaktformular h3{margin-bottom:24px}
+.formular-rad{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.formular-falt{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;min-width:0}
+.formular-falt label{font-size:16px;font-weight:600}
+.formular-falt label span{font-size:13px;font-weight:400}
+.formular-falt input,.formular-falt textarea{width:100%;min-width:0;border:1px solid #6585a3;border-radius:12px;background:#0b1922;color:var(--text);font:inherit;padding:12px 14px}
+.formular-falt textarea{resize:vertical;min-height:140px}
+.formular-falt input:focus-visible,.formular-falt textarea:focus-visible{outline:3px solid var(--himmelsbla);outline-offset:3px}
+.kontaktformular .knapp{margin-top:20px;cursor:pointer}
+.kontaktformular fieldset:disabled{opacity:.65}
+.kontaktformular fieldset:disabled .knapp{cursor:wait;transform:none}
+.formular-status{margin:20px 0 0;font-size:16px}
+.formular-status:empty{display:none}
+.formular-status[data-state="error"]{color:#ffb4ab}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+@media(max-width:767px){.formular-rad{grid-template-columns:1fr;gap:0}}
 .formular-info{font-size:14px;line-height:1.6;margin:20px 0 0}
 @media(max-width:767px){.kontaktformular{padding:20px}}
 

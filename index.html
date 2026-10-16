@@ -137,13 +137,23 @@
     <section id="kontakt" class="kontakt-innehall">
       <p class="etikett">Kontakt</p><h2>Låt oss höras.</h2>
       <p>Vill du komma i kontakt med mig eller prata om digital marknadsföring? Mejla mig eller hör av dig på LinkedIn.</p>
-      <!-- Fält, rubriker och skickafunktion hämtas från det publicerade HubSpot-formuläret. -->
-      <div class="kontaktformular">
-        <script src="https://js-eu1.hsforms.net/forms/embed/149565909.js" defer></script>
-        <div class="hs-form-frame" data-region="eu1" data-form-id="9ad85a76-5ac2-4927-8fd1-e094a9e6d5cc" data-portal-id="149565909"></div>
-        <noscript><p>Aktivera JavaScript för att visa kontaktformuläret, eller använd mejllänken nedan.</p></noscript>
-        <p class="formular-info">Om formuläret inte visas kan du använda mejllänken nedan.</p>
-      </div>
+      <!-- Egna fält; namn matchar de verifierade kontaktegenskaperna i HubSpot. -->
+      <form id="kontaktformular" class="kontaktformular" aria-labelledby="formular-rubrik" method="post">
+        <h3 id="formular-rubrik">Skriv till mig</h3>
+        <fieldset disabled>
+          <legend class="sr-only">Kontaktuppgifter och meddelande</legend>
+          <div class="formular-rad">
+            <div class="formular-falt"><label for="kontakt-namn">För- och Efternamn</label><input id="kontakt-namn" name="firstname" autocomplete="name" maxlength="100"></div>
+            <div class="formular-falt"><label for="kontakt-epost">E-Post <span>(obligatoriskt)</span></label><input id="kontakt-epost" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+          </div>
+          <div class="formular-falt"><label for="kontakt-foretag">Företag (Valfritt)</label><input id="kontakt-foretag" name="company" autocomplete="organization" maxlength="200"></div>
+          <div class="formular-falt"><label for="kontakt-meddelande">Meddelande</label><textarea id="kontakt-meddelande" name="message" rows="5" maxlength="5000"></textarea></div>
+          <p class="formular-info">Uppgifterna skickas till Tim via HubSpot för att hantera ditt meddelande.</p>
+          <button class="knapp" type="submit">Skicka</button>
+        </fieldset>
+        <p id="formular-status" class="formular-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        <noscript><p>Formuläret kräver JavaScript. Du kan också använda mejllänken nedan.</p></noscript>
+      </form>
       <div class="kontaktlankar">
         <a class="knapp" href="mailto:Fjordsten.tim@gmail.com">Fjordsten.tim@gmail.com</a>
         <a class="knapp knapp-linkedin" href="https://www.linkedin.com/in/tim-fjordsten-5a273939b/" target="_blank" rel="noopener noreferrer">Tim Fjordsten på LinkedIn</a>
