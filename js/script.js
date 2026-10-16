@@ -1,18 +1,6 @@
-// Årtal och en utfällning som fungerar med tangentbord och skärmläsare.
+// Håll sidfotens årtal aktuellt.
 const ar = document.querySelector('#ar');
 if (ar) ar.textContent = new Date().getFullYear();
-const knapp = document.querySelector('.las-mer');
-const mer = document.querySelector('#mer-om-mig');
-if (knapp && mer) {
-  mer.hidden = true;
-  knapp.hidden = false;
-  knapp.setAttribute('aria-expanded', 'false');
-  knapp.addEventListener('click', () => {
-    mer.hidden = !mer.hidden;
-    knapp.setAttribute('aria-expanded', String(!mer.hidden));
-    knapp.textContent = mer.hidden ? 'Läs mer' : 'Visa mindre';
-  });
-}
 // Innehållet är alltid synligt, också när JavaScript saknas.
 if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const observer = new IntersectionObserver(entries => {
@@ -24,4 +12,22 @@ if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: re
     });
   }, {threshold: 0.08});
   document.querySelectorAll('main > section:not(.intro)').forEach(section => observer.observe(section));
+}
+
+// Rullande kurslista: endast originalet läses upp av skärmläsare.
+const kursbanner = document.querySelector('.kursbanner');
+if (kursbanner) {
+  const lista = kursbanner.querySelector('.kurslista');
+  const spar = kursbanner.querySelector('.kurser-spar');
+  const minskadRorelse = matchMedia('(prefers-reduced-motion: reduce)');
+  const kopia = lista.cloneNode(true);
+  kopia.classList.add('kurskopia');
+  kopia.setAttribute('aria-hidden', 'true');
+  spar.append(kopia);
+  function uppdateraRullning() {
+    kursbanner.classList.toggle('rullar', !minskadRorelse.matches);
+    kopia.hidden = minskadRorelse.matches;
+  }
+  minskadRorelse.addEventListener('change', uppdateraRullning);
+  uppdateraRullning();
 }
