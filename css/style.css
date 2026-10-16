@@ -12,13 +12,24 @@
   --dekor:linear-gradient(125deg,var(--kobolt),var(--himmelsbla) 46%,var(--blekgul) 76%,var(--solgul));
   --radie:20px;--rund:999px;--bredd:1200px;--marginal:24px;--avstand:80px;
 }
-/* Ljust Sicily-tema: blåtonade ytor och samma gula CTA. */
+/* Ljust Sicily-tema: synlig struktur, ljusa läsytor och mörka blå kontraster. */
 :root[data-theme="light"]{
   color-scheme:light;
-  --text:#102337;--yta:#edf4fc;--kort:#f4f8fe;--kant:#a5b8cf;
-  --header:#e0ecfb;--fot:rgb(225 237 251 / 80%);
-  --bakgrund-toning:rgb(237 244 252 / 90%);
+  --text:#102337;--yta:#e0ecf8;--kort:#edf4fc;--kant:#8da8c3;
+  --header:#102337;--fot:rgb(8 19 28 / 94%);
+  --bakgrund-toning:rgb(237 244 252 / 68%);
   --tema-yta:#cbdff6;--tema-ikon:#1d59bb;--detalj:var(--kobolt);
+}
+/* Mörka ankare ger det ljusa temat samma karaktär som originalet. */
+:root[data-theme="light"] .sidhuvud{
+  --text:#edf4fc;--kant:#42627d;--detalj:#76b9ff;
+  --tema-yta:#203d57;--tema-ikon:#76b9ff;
+}
+:root[data-theme="light"] .kontaktfot{
+  --text:#edf4fc;--kort:#132b40;--kant:#42627d;
+}
+:root[data-theme="light"] .kurser-fonster{
+  --kort:#132b40;--text:#edf4fc;--kant:#42627d;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:160px}
