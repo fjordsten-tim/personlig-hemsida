@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Lär känna Tim Fjordsten, student inom digital marknadsföring i Göteborg. Följ mina studier och projekt.">
   <title>Tim Fjordsten | Student inom digital marknadsföring</title>
+  <!-- Läs sparat tema före första renderingen för att undvika färgblink. -->
+  <script>
+    try {
+      if (localStorage.getItem('tim-tema') === 'light') document.documentElement.dataset.theme = 'light';
+    } catch (_) { /* Mörkt standardläge fungerar även när lagring är blockerad. */ }
+  </script>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/script.js" defer></script>
   <!-- Google Tag Manager -->
@@ -27,7 +33,13 @@
       <li><a href="#start">Start</a></li><li><a href="#om">Om mig</a></li>
       <li><a href="#projekt">Projekt</a></li><li><a href="#tjanster">Kompetenser</a></li>
     </ul></nav>
-    <a class="knapp" href="#kontakt">Ta kontakt</a>
+    <div class="header-val">
+      <button class="temaknapp" type="button" aria-label="Byt till ljust läge" title="Byt till ljust läge" hidden>
+        <svg class="ikon-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+        <svg class="ikon-mane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.9 13.1A9 9 0 0 1 10.9 3.1a9 9 0 1 0 10 10Z"/></svg>
+      </button>
+      <a class="knapp" href="#kontakt">Ta kontakt</a>
+    </div>
   </header>
 
   <main>

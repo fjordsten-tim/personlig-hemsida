@@ -48,3 +48,22 @@ if (kursbanner) {
   minskadRorelse.addEventListener('change', uppdateraRullning);
   uppdateraRullning();
 }
+
+// Mörkt är standard. Besökarens manuella val sparas när lagring är tillgänglig.
+const temaknapp = document.querySelector('.temaknapp');
+if (temaknapp) {
+  function visaTemaval() {
+    const ljust = document.documentElement.dataset.theme === 'light';
+    const etikett = ljust ? 'Byt till mörkt läge' : 'Byt till ljust läge';
+    temaknapp.setAttribute('aria-label', etikett);
+    temaknapp.title = etikett;
+  }
+  temaknapp.hidden = false;
+  visaTemaval();
+  temaknapp.addEventListener('click', () => {
+    const tema = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = tema;
+    try { localStorage.setItem('tim-tema', tema); } catch (_) { /* Växlingen fungerar utan lagring. */ }
+    visaTemaval();
+  });
+}
