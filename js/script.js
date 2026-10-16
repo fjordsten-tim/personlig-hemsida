@@ -1,3 +1,20 @@
+// Ny sidöppning utan sektionslänk och omladdning börjar högst upp.
+// Direktlänkar till sektioner och webbläsarens bakåtknapp behåller sitt beteende.
+const navigering = performance.getEntriesByType('navigation')[0];
+const borjaHogstUpp = navigering?.type === 'reload' ||
+  (navigering?.type !== 'back_forward' && !window.location.hash);
+if (borjaHogstUpp) {
+  const tidigareScrollaterstallning = history.scrollRestoration;
+  history.scrollRestoration = 'manual';
+  if (navigering?.type === 'reload' && window.location.hash) {
+    history.replaceState(history.state, '', window.location.pathname + window.location.search);
+  }
+  window.addEventListener('pageshow', () => {
+    window.scrollTo({top: 0, left: 0, behavior: 'instant'});
+    history.scrollRestoration = tidigareScrollaterstallning;
+  }, {once: true});
+}
+
 // Håll sidfotens årtal aktuellt.
 const ar = document.querySelector('#ar');
 if (ar) ar.textContent = new Date().getFullYear();
