@@ -77,7 +77,10 @@ if (kontaktformular) {
   let skickar = false;
   kontaktformular.addEventListener('submit', async event => {
     event.preventDefault();
-    if (skickar || !kontaktformular.reportValidity()) return;
+    if (skickar) return;
+    const meddelandefalt = kontaktformular.querySelector('[name="message"]');
+    meddelandefalt.setCustomValidity(meddelandefalt.value.trim() ? '' : 'Skriv ett meddelande.');
+    if (!kontaktformular.reportValidity()) return;
     const data = new FormData(kontaktformular);
     const fields = ['firstname', 'email', 'company', 'message'].map(name => ({
       objectTypeId: '0-1', name, value: String(data.get(name) || '').trim()
@@ -122,6 +125,9 @@ if (kontaktformular) {
       kontaktformular.removeAttribute('aria-busy');
       skicka.textContent = 'Skicka';
     }
+  });
+  kontaktformular.querySelector('[name="message"]').addEventListener('input', event => {
+    event.target.setCustomValidity('');
   });
   faltgrupp.disabled = false;
 }

@@ -143,11 +143,11 @@
         <fieldset disabled>
           <legend class="sr-only">Kontaktuppgifter och meddelande</legend>
           <div class="formular-rad">
-            <div class="formular-falt"><label for="kontakt-namn">För- och Efternamn</label><input id="kontakt-namn" name="firstname" autocomplete="name" maxlength="100"></div>
+            <div class="formular-falt"><label for="kontakt-namn">För- och Efternamn <span>(obligatoriskt)</span></label><input id="kontakt-namn" name="firstname" autocomplete="name" maxlength="100" required pattern=".*\S.*"></div>
             <div class="formular-falt"><label for="kontakt-epost">E-Post <span>(obligatoriskt)</span></label><input id="kontakt-epost" name="email" type="email" autocomplete="email" maxlength="254" required></div>
           </div>
-          <div class="formular-falt"><label for="kontakt-foretag">Företag (Valfritt)</label><input id="kontakt-foretag" name="company" autocomplete="organization" maxlength="200"></div>
-          <div class="formular-falt"><label for="kontakt-meddelande">Meddelande</label><textarea id="kontakt-meddelande" name="message" rows="5" maxlength="5000"></textarea></div>
+          <div class="formular-falt"><label for="kontakt-foretag">Företag <span>(valfritt)</span></label><input id="kontakt-foretag" name="company" autocomplete="organization" maxlength="200"></div>
+          <div class="formular-falt"><label for="kontakt-meddelande">Meddelande <span>(obligatoriskt)</span></label><textarea id="kontakt-meddelande" name="message" rows="5" maxlength="5000" required></textarea></div>
           <p class="formular-info">Uppgifterna skickas till Tim via HubSpot för att hantera ditt meddelande.</p>
           <button class="knapp" type="submit">Skicka</button>
         </fieldset>
