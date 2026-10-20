@@ -15,6 +15,36 @@ if (borjaHogstUpp) {
   }, {once: true});
 }
 
+// Kompakt mobilmeny. Utan JavaScript ligger länkarna synliga.
+const menyknapp = document.querySelector('.menyknapp');
+const huvudmeny = document.querySelector('#huvudmeny');
+const sidhuvud = document.querySelector('.sidhuvud');
+if (menyknapp && huvudmeny && sidhuvud) {
+  const mobilvy = matchMedia('(max-width: 767px)');
+  function stangMeny(flyttaFokus = false) {
+    menyknapp.setAttribute('aria-expanded', 'false');
+    sidhuvud.classList.remove('meny-oppen');
+    if (flyttaFokus) menyknapp.focus();
+  }
+  menyknapp.hidden = false;
+  sidhuvud.classList.add('har-mobilmeny');
+  menyknapp.addEventListener('click', () => {
+    const oppen = menyknapp.getAttribute('aria-expanded') !== 'true';
+    menyknapp.setAttribute('aria-expanded', String(oppen));
+    sidhuvud.classList.toggle('meny-oppen', oppen);
+  });
+  huvudmeny.addEventListener('click', event => {
+    if (mobilvy.matches && event.target.closest('a')) stangMeny(true);
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && sidhuvud.classList.contains('meny-oppen')) stangMeny(true);
+  });
+  document.addEventListener('click', event => {
+    if (!sidhuvud.contains(event.target)) stangMeny();
+  });
+  mobilvy.addEventListener('change', () => stangMeny());
+}
+
 // Håll sidfotens årtal aktuellt.
 const ar = document.querySelector('#ar');
 if (ar) ar.textContent = new Date().getFullYear();

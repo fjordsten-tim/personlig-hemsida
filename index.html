@@ -29,9 +29,10 @@
   <a class="hoppa" href="#start">Hoppa till innehåll</a>
   <header class="sidhuvud">
     <a class="namn" href="#start">Tim Fjordsten<span class="namn-punkt" aria-hidden="true">.</span></a>
-    <nav aria-label="Huvudmeny"><ul>
+    <nav id="huvudmeny" aria-label="Huvudmeny"><ul>
       <li><a href="#start">Start</a></li><li><a href="#om">Om mig</a></li>
       <li><a href="#projekt">Projekt</a></li><li><a href="#tjanster">Kompetenser</a></li>
+      <li class="mobil-kontakt"><a href="#kontakt">Ta kontakt</a></li>
     </ul></nav>
     <div class="header-val">
       <button class="temaknapp" type="button" aria-label="Byt till ljust läge" title="Byt till ljust läge" hidden>
@@ -39,6 +40,10 @@
         <svg class="ikon-mane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.9 13.1A9 9 0 0 1 10.9 3.1a9 9 0 1 0 10 10Z"/></svg>
       </button>
       <a class="knapp" href="#kontakt">Ta kontakt</a>
+      <button class="menyknapp" type="button" aria-expanded="false" aria-controls="huvudmeny" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <span>Meny</span>
+      </button>
     </div>
   </header>
 

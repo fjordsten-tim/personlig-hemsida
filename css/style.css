@@ -70,10 +70,48 @@ main,.sidhuvud,.kontakt-innehall{width:min(calc(100% - 2 * var(--marginal)),var(
 .delad-sektion{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);gap:48px}.delad-sektion>div{min-width:0}.projektlista{display:grid;gap:24px;min-width:0}.projektfigur{margin:24px 0}.projektbildlank{display:block;border-radius:12px}.projektbild{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--kant)}.projektfigur figcaption{font-size:.875rem;line-height:1.5;margin-top:12px}.projektkort h3{font-size:2rem}.projekttaggar{margin:24px 0}.projektlank{font-weight:600}.rutnat{list-style:none;display:grid;gap:16px;margin:0;padding:0}.kort p:last-child{margin-bottom:0}
 /* 6. Kontaktknappar på samma höjd, gemensam mörk avslutning. */
 .kontaktfot{margin-top:var(--avstand);background:var(--fot);color:var(--text)}.kontakt-innehall{position:relative;padding-block:64px 28px}.kontakt-innehall h2{color:inherit}.kontaktlankar{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:28px}.kontaktlankar .knapp{background:var(--cta);color:var(--knapptext)}.kontaktlankar .knapp:hover{background:var(--cta-hover)}.kontaktlankar .knapp-linkedin{background:#0a66c2;color:#fff}.kontaktlankar .knapp-linkedin:hover{background:#004182}.fot-bas{display:flex;justify-content:space-between;gap:24px;border-top:1px solid var(--kant);margin-top:48px;padding-top:24px;font-size:13px}.fot-bas p{margin:0}
+/* Mobilmenyn visas först när JavaScript har aktiverat den. */
+.menyknapp,.mobil-kontakt{display:none}
+.menyknapp{align-items:center;justify-content:center;gap:6px;min-height:44px;padding:8px 10px;border:1px solid var(--kant);border-radius:var(--rund);background:var(--tema-yta);color:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.menyknapp svg{width:20px;height:20px}
 /* 7. Mobil och rörelseinställningar. */
 @keyframes intoning{from{opacity:.65;transform:translateY(8px)}to{opacity:1;transform:none}}.synlig{animation:intoning .4s ease-out both}
 @media(max-width:1023px){.sidhuvud{grid-template-columns:1fr auto}.sidhuvud nav{grid-column:1/-1;grid-row:2}.sidhuvud{border-radius:24px}nav ul{justify-content:center}.intro{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px}.hero-dekor{display:none}.intro h1{font-size:clamp(2rem,5.2vw,3.3rem)}.om-layout{grid-template-columns:1fr 1fr}.om-layout .presentation{grid-column:1/-1}.presentation{grid-column:auto;grid-row:auto}.highlight{grid-column:auto}.delad-sektion{gap:24px}.kontakt-innehall{padding-right:0}}
-@media(max-width:767px){:root{--avstand:48px;--marginal:20px}.sidhuvud{padding:12px;gap:12px}.namn{font-size:14px}.header-val{gap:8px}.header-val>.knapp{font-size:14px;padding:10px 12px}nav ul{gap:16px}nav a{font-size:13px}.intro{grid-template-columns:1fr;padding-top:40px;gap:24px}.intro h1{font-size:clamp(2rem,7.3vw,3.5rem)}.intro-person{width:min(100%,400px);justify-self:center}.intro-text{max-width:none}.badges{gap:8px}.badges li{padding:8px 14px}.om-layout,.delad-sektion{grid-template-columns:1fr}.kort,.fot-bas{flex-direction:column}.kontakt-innehall{padding-top:48px}.kontaktlankar{align-items:stretch}.kontaktlankar .knapp{max-width:100%;overflow-wrap:anywhere}}
+@media(max-width:767px){
+  :root{--avstand:48px;--marginal:16px}
+  html{scroll-padding-top:96px}
+  body{font-size:16px}
+  .sidhuvud{top:8px;margin-top:8px;padding:8px 12px;gap:0 8px;border-radius:24px;grid-template-columns:minmax(0,1fr) auto}
+  .namn{font-size:14px;white-space:normal;line-height:1.2}
+  .header-val{gap:6px}
+  .header-val>.knapp{display:none}
+  .menyknapp{display:inline-flex}
+  .mobil-kontakt{display:block}
+  .sidhuvud nav{margin-top:8px;padding-top:8px;border-top:1px solid var(--kant)}
+  .sidhuvud.har-mobilmeny:not(.meny-oppen) nav{display:none}
+  .sidhuvud nav ul{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+  .sidhuvud nav a{padding:10px 12px;min-height:44px;font-size:14px;border-radius:12px}
+  .sidhuvud nav a:hover{background:var(--tema-yta)}
+  .mobil-kontakt{grid-column:1/-1}
+  .mobil-kontakt a{color:var(--solgul)}
+  .intro{grid-template-columns:1fr;padding-top:36px;gap:24px}
+  .intro h1{font-size:clamp(1.8rem,7.5vw,3.5rem);margin-bottom:20px}
+  .roll{font-size:16px;margin-bottom:24px}
+  .intro-person{width:min(100%,340px);justify-self:center}
+  .intro-text{max-width:none;margin-top:16px;font-size:16px}
+  h2{font-size:clamp(2rem,9vw,3rem);margin-bottom:20px}
+  .badges{gap:8px}.badges li{padding:7px 12px;font-size:13px}
+  .om-layout,.delad-sektion{grid-template-columns:1fr}
+  .delad-sektion{gap:20px}
+  .kort{padding:20px}
+  .projektkort h3,.presentation h3{font-size:1.75rem}
+  .projektfigur{margin:20px 0}
+  .projektfigur figcaption{font-size:13px}
+  .fot-bas{flex-direction:column;gap:16px;margin-top:32px}
+  .kontakt-innehall{padding-top:40px}
+  .kontaktlankar{flex-direction:column;align-items:stretch;gap:12px}
+  .kontaktlankar .knapp{max-width:100%;overflow-wrap:anywhere;min-height:48px}
+}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.knapp:hover{transform:none}}
 
 /* 8. Kursbanner: innehållets bredd, sluten ram och kontinuerlig rullning. */
@@ -120,4 +158,3 @@ main,.sidhuvud,.kontakt-innehall{width:min(calc(100% - 2 * var(--marginal)),var(
 .temaknapp .ikon-mane{display:none}
 :root[data-theme="light"] .temaknapp .ikon-sol{display:none}
 :root[data-theme="light"] .temaknapp .ikon-mane{display:block}
-@media(max-width:380px){.sidhuvud{column-gap:8px}.namn{font-size:13px}.header-val>.knapp{padding-inline:10px;font-size:13px}}
